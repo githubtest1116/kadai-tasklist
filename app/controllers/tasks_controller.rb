@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_action :set_params, only:[:show, :edit, :update, :destroy]
+
   #画面必要
   def index
     @tasks = Task.all
@@ -6,7 +8,8 @@ class TasksController < ApplicationController
 
   #画面必要
   def show
-    @task = Task.find(params[:id])
+    set_params
+    #@task = Task.find(params[:id])
   end
 
   #画面必要
@@ -31,11 +34,13 @@ class TasksController < ApplicationController
 
   #画面必要
   def edit
-    @task = Task.find(params[:id])
+    set_params
+    #@task = Task.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
+    set_params
+    #@task = Task.find(params[:id])
     
     if @task.update(post_params)
       flash[:success] = "The registration is succeeded"
@@ -50,7 +55,8 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
+    set_params
+    #@task = Task.find(params[:id])
     @task.destroy
     
     flash[:success] = "The task is deleted"
@@ -58,8 +64,12 @@ class TasksController < ApplicationController
   end
 
   private
+  
+  def set_params
+    @task = Task.find(params[:id])
+  end
 
   def post_params
-    params.require(:task).permit(:content)
+    params.require(:task).permit(:content, :status)
   end
 end

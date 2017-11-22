@@ -2,6 +2,9 @@
 
 id:<%= @task.id %>
 <%= form_for(@task) do |f| %>
+    <%= f.label :status, '状態' %>
+    <%= f.text_field :status %>
+    
     <%= f.label :content, 'タスク' %>
     <%= f.text_field :content %>
 
