@@ -1,18 +1,20 @@
 <h1>新規タスク登録</h1>
 
+<%= render 'form', message: @task %>
+
 <%= form_for(@task) do |f| %>
-    <%= f.label :status, '状態' %>
-    <%#= f.select :status, [["未着手", "new"], ["実施中", "doing"], ["完了", "done"]]%>
-    <%= f.select :status, [["未着手"], ["実施中"], ["完了"]]%>
-    <%#= f.text_field :status %>
+    <div class="form-group">
+        <%= f.label :status, '状態' %>
+        <%= f.select :status, [["未着手"], ["実施中"], ["完了"]]%>
+    </div>
+    <div class="form-group">
+        <%= f.label :content, 'タスク' %>
+        <%= f.text_field :content, class:"form-control" %>
+    </div>
 
-    <%= f.label :content, 'タスク' %>
-
-    <%# text_areaの方がいいかもしれない　%>
-    <%= f.text_field :content %>
-
-    <%= f.submit '登録' %>
+    <%= f.submit '登録する', class:"btn btn-default" %>
+    <%= link_to '一覧に戻る', root_path, class:"btn btn-default" %>
 <% end %>
 
-<%= link_to '一覧に戻る', root_path %>
+
 

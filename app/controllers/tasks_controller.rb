@@ -3,12 +3,12 @@ class TasksController < ApplicationController
 
   #画面必要
   def index
-    @tasks = Task.all
+    @tasks = Task.all.page(params[:page]).per(15)
   end
 
   #画面必要
   def show
-    set_params
+    #set_params
     #@task = Task.find(params[:id])
   end
 
@@ -34,12 +34,12 @@ class TasksController < ApplicationController
 
   #画面必要
   def edit
-    set_params
+    #set_params
     #@task = Task.find(params[:id])
   end
 
   def update
-    set_params
+    #set_params
     #@task = Task.find(params[:id])
     
     if @task.update(post_params)
@@ -55,7 +55,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    set_params
+    #set_params
     #@task = Task.find(params[:id])
     @task.destroy
     

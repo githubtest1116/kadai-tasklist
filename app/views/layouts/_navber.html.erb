@@ -1,0 +1,25 @@
+<header>
+	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				
+				<%# top page%>
+				<a href="/" class="navbar-brand">
+					<span class="glyphicon glyphicon-tasks"></span>
+					Tasklist
+				</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li><%= link_to '新規登録', new_task_path %></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
