@@ -1,0 +1,19 @@
+<%# ここは全体のトップページ　%>
+<%# ログイン前/後で表示内容を変える　%>
+<%# ログイン前：ユーザ登録/ログイン　%>
+<%# ログイン後：自身が登録したタスクの一覧表示　%>
+
+
+<%# ログイン前：ユーザ登録/ログイン　%>
+<div class="center jumbtron">
+	<div class="text-center">
+		<h1>タスク管理アプリ</h1>
+		<h3>あたなのタスクを登録・管理できます</h3>
+		<div id="o-margin">
+			<%= link_to 'ユーザ登録', signup_url, class:"btn btn-default" %>
+			<%= link_to 'ログイン', new_session_url, class:"btn btn-default" %>
+		</div>
+	</div>
+</div>
+
+<%# ログイン後：自身が登録したタスクの一覧表示　%>
