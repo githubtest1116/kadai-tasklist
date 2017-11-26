@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xs-12  col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6">
         <h1>新規タスク登録</h1>
-        <%= render 'form', message: @task %>
+        <%= render 'layouts/error_messages', message: @task %>
         
         <%= form_for(@task) do |f| %>
             <div class="form-group">

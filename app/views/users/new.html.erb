@@ -1,2 +1,10 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<%# ユーザの新規登録画面 %>
+
+<div class="row">
+	<div class="col-xs-12  col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6">
+		<h1>新規ユーザ登録</h1>
+		<%= render 'layouts/error_messages', message: @user %>
+		
+		<%= render 'form', user: @user %>
+	</div>
+</div>
