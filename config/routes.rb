@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
 
-  root 'toppages#index'
-  #root to: 'tasks#index'
+  root            to: 'toppages#index'
 
-  get 'signup' => 'users#new'
+  get 'signup', to: 'users#new'
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
 
   resources :tasks
   resources :users
-  resources :sessions
+  resources :sessions, only: [:edit, :update]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

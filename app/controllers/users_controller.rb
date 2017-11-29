@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_params, only: [:show, :edit, :update, :destroy]
+  before_action :require_user_logged_in, only: [:index, :show]
   
   
   #画面必要
@@ -34,11 +35,10 @@ class UsersController < ApplicationController
     #before_action
   end
   
-  #？？？なぜかパスワードがブランクでも登録できちゃう？？？あと、flashメッセージが表示されない
   def update
     #before_action
     
-    if @user.update(post_params)
+    if !@user == nil && @user.update(post_params)
       flash[:success] = "登録情報を更新しました"
       redirect_to @user
     else
