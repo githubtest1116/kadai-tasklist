@@ -53,6 +53,7 @@ class UsersController < ApplicationController
     @user.destroy
     
     flash[:success] = "登録情報を削除しました"
+    session[:user_id] = nil
     redirect_to root_url
   end
   

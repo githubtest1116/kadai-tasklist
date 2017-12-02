@@ -17,7 +17,32 @@
 	</aside>
 	<div class="col-xs-8">
 		<ul class="nav nav-tabs nav-justified">
-			<li><a href="#">タスク名</a></li>
+			<li class="if current_page?(user_path(@user)) %>"><%= link_to user_path(@user) do %>タスク名 <span class="badge"><%= @count_microposts %></span><% end %></li>
 		</ul>
+		<ul>
+    <table class="table table-striped">
+      <thead>
+          <th>id</th>
+          <th>状態</th>
+          <th>内容</th>
+      </thead>
+      <tbody>
+      	<% @user.tasks.each do |task| %>
+          <tr>
+              <td><%= link_to task.id, task_path(task) %></td>
+              <td><%= task.status %></td>
+              <td><%= task.content %></td>
+          </tr>
+        <% end %>                
+      </tbody>
+		 </table>
+		 <%#= paginate @tasks %>
+		</ul>
+		<div>
+			<%= link_to '新規タスク登録', new_task_path, class:"btn btn-primary" %>
+		</div>
 	</div>
 </div>
+
+
+

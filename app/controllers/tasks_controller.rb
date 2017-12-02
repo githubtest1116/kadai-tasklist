@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_params, only:[:show, :edit, :update, :destroy]
+  #before_action :set_params, only:[:show, :edit, :update, :destroy]
+  before_action :set_params, only:[:show, :edit]
 
   #画面必要
   def index
@@ -8,8 +9,9 @@ class TasksController < ApplicationController
 
   #画面必要
   def show
-    #set_params
+    set_params
     #@task = Task.find(params[:id])
+    @user = User.find_by(id: current_user)
   end
 
   #画面必要
@@ -18,7 +20,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(post_params)
+    #@task = Task.new(post_params)
+    @task = current_user.tasks.build(post_params)
 
     if @task.save
       flash[:success] = "The registration is succeeded"
@@ -34,11 +37,13 @@ class TasksController < ApplicationController
 
   #画面必要
   def edit
-    #set_params
+    set_params
     #@task = Task.find(params[:id])
+    @user = User.find_by(id: current_user)
   end
 
   def update
+    @task = current_user.tasks.build(post_params)
     #set_params
     #@task = Task.find(params[:id])
     
@@ -46,7 +51,7 @@ class TasksController < ApplicationController
       flash[:success] = "The registration is succeeded"
 
       #showアクションではなく、一覧へ遷移するようにした
-      redirect_to root_path
+      redirect_to @user
     
     else
       flash.now[:danger] = "The registration is failed"
@@ -55,12 +60,15 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    correct_user
     #set_params
     #@task = Task.find(params[:id])
+    #@task = Task.find_by(id: current_user)
     @task.destroy
     
     flash[:success] = "The task is deleted"
-    redirect_to root_path
+    redirect_back(fallback_location: root_path)
+    #redirect_to user_path
   end
 
   private
@@ -71,5 +79,12 @@ class TasksController < ApplicationController
 
   def post_params
     params.require(:task).permit(:content, :status)
+  end
+  
+  def correct_user
+    @task = current_user.tasks.find_by(id: params[:id])
+    unless @task
+      redirect_to root_url
+    end
   end
 end
