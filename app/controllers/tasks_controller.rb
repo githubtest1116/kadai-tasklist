@@ -44,8 +44,8 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = current_user.tasks.build(post_params)
-    #set_params
+    #@task = current_user.tasks.build(post_params)
+    set_params
     #@task = Task.find(params[:id])
     
     if @task.update(post_params)
