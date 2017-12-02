@@ -51,7 +51,6 @@ class TasksController < ApplicationController
     if @task.update(post_params)
       flash[:success] = "The registration is succeeded"
 
-      #showアクションではなく、一覧へ遷移するようにした
       redirect_to user_path(current_user)
     
     else

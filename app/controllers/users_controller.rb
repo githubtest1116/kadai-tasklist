@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_params, only: [:show, :edit, :update, :destroy]
   before_action :require_user_logged_in, only: [:index, :show]
-  
+
   
   #画面必要
   def index
@@ -11,6 +11,14 @@ class UsersController < ApplicationController
   #画面必要
   def show
     #before_action
+
+    #<<-PAGE
+    if session[:user_id] == @user.id
+      return @user
+    else
+      redirect_to root_url
+    end
+    #PAGE
   end
 
   #画面必要
