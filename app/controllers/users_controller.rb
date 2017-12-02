@@ -23,6 +23,10 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:success] = "ユーザの登録が完了しました"
+      
+      #追加
+      session[:user_id] = @user.id
+      
       redirect_to @user
     else
       flash.now[:danger] = "ユーザの登録に失敗しました"

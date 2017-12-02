@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   #before_action :set_params, only:[:show, :edit, :update, :destroy]
   before_action :set_params, only:[:show, :edit]
+  before_action :correct_user, only:[:show, :edit, :update, :destroy]
 
   #画面必要
   def index
@@ -9,7 +10,7 @@ class TasksController < ApplicationController
 
   #画面必要
   def show
-    set_params
+    #set_params
     #@task = Task.find(params[:id])
     @user = User.find_by(id: current_user)
   end
@@ -51,7 +52,7 @@ class TasksController < ApplicationController
       flash[:success] = "The registration is succeeded"
 
       #showアクションではなく、一覧へ遷移するようにした
-      redirect_to @user
+      redirect_to user_path(current_user)
     
     else
       flash.now[:danger] = "The registration is failed"
@@ -60,15 +61,16 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    correct_user
+    #correct_user
     #set_params
     #@task = Task.find(params[:id])
     #@task = Task.find_by(id: current_user)
     @task.destroy
     
     flash[:success] = "The task is deleted"
-    redirect_back(fallback_location: root_path)
-    #redirect_to user_path
+    #redirect_back(fallback_location: root_path)
+    #redirect_to root_url
+    redirect_to user_path(current_user)
   end
 
   private
@@ -83,8 +85,9 @@ class TasksController < ApplicationController
   
   def correct_user
     @task = current_user.tasks.find_by(id: params[:id])
-    unless @task
-      redirect_to root_url
-    end
+    redirect_to root_url if @task.user != current_user
+    #unless @task
+    #  redirect_to root_url
+    #end
   end
 end
